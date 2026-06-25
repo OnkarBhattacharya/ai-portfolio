@@ -2,7 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Shield, Brain, Lock, Users, Zap, BookOpen } from "lucide-react";
 import { useState } from "react";
+
 import { useLocation } from "wouter";
+
 
 
 export default function Home() {
@@ -75,12 +77,24 @@ export default function Home() {
               Secure, ethical, and conscious AI solutions designed for corporates, schools and institutes. Deploy powerful AI on your own network with complete control and transparency.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-white"
+                onClick={() => {
+                  const el = document.getElementById("solutions");
+                  if (!el) return;
+
+                  // Compensate for sticky header height (matches header: h-16)
+                  const headerOffset = 64;
+                  const elementTop = el.getBoundingClientRect().top;
+                  const targetY = window.scrollY + elementTop - headerOffset;
+
+                  window.scrollTo({ top: targetY, behavior: "smooth" });
+                }}
+              >
                 Explore Solutions <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
-              <Button size="lg" variant="outline">
-                View Case Studies
-              </Button>
+
             </div>
           </div>
         </div>
@@ -186,7 +200,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Button className="bg-primary hover:bg-primary/90">Learn More</Button>
+
               </div>
               <div className="relative h-96 rounded-lg overflow-hidden border border-border">
                 <img
@@ -232,10 +246,10 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Button className="bg-primary hover:bg-primary/90">Learn More</Button>
               </div>
             </div>
           )}
+
 
           {/* Research Solutions */}
           {activeTab === "research" && (
@@ -264,7 +278,6 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Button className="bg-primary hover:bg-primary/90">Learn More</Button>
               </div>
               <div className="relative h-96 rounded-lg overflow-hidden border border-border">
                 <img
