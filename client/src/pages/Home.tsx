@@ -2,9 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Shield, Brain, Lock, Users, Zap, BookOpen } from "lucide-react";
 import { useState } from "react";
+import { useLocation } from "wouter";
+
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("corporate");
+  const [, setLocation] = useLocation();
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -31,11 +35,20 @@ export default function Home() {
             <a href="#security" className="text-sm hover:text-primary transition-colors">
               Security
             </a>
-            <a href="/contact" className="text-sm hover:text-primary transition-colors">
+            <a
+              href="/contact"
+              className="text-sm hover:text-primary transition-colors"
+            >
               Contact
             </a>
           </nav>
-          <Button className="bg-primary hover:bg-primary/90" onClick={() => window.location.href = '/contact'}>Get Started</Button>
+
+          <Button
+            className="bg-primary hover:bg-primary/90"
+            onClick={() => setLocation("/contact")}
+          >
+            Get Started
+          </Button>
         </div>
       </header>
 
